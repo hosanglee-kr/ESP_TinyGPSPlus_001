@@ -365,6 +365,7 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
 			Serial.println(  "나쁜 (Poor)");
         } else {
 			Serial.println(  "매우 나쁜 (Very Poor)");
+		}
     } else {
         Serial.println("  HDOP 데이터: 유효하지 않음");
     }
