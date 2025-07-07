@@ -37,6 +37,8 @@ unsigned long g_T10_lastGpsPrintTime = 0;
 // T10_GPS_ALL_DATA 구조체 정의
 // =========================================================================
 
+
+
 // GPS의 모든 정보를 담을 구조체 정의
 struct T10_GPS_ALL_DATA {
     // 위치 정보
@@ -380,7 +382,7 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
  * @brief GPS 정보 출력 간격이 되었는지 확인하고, 그렇다면 GPS 정보를 업데이트하고 출력합니다.
  * 이 함수는 loop() 함수에서 계속 호출되어야 합니다.
  */
-void T10_handleGpsUpdateAndPrint() {
+void T10_GPS_run() {
     unsigned long v_currentTime = millis(); // 로컬 변수 v_currentTime
 
     if (v_currentTime - g_T10_lastGpsPrintTime >= G_T10_GPS_PRINT_INTERVAL_MS) {
@@ -391,5 +393,8 @@ void T10_handleGpsUpdateAndPrint() {
         T10_printGpsAllData(v_currentGpsData);   // 구조체 내용 출력
     }
 }
+
+
+
 
 #endif // T10_GPSMODULE_H
