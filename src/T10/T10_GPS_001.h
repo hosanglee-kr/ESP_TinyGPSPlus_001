@@ -348,8 +348,6 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
         Serial.println("  고도 데이터: 유효하지 않음");
     }
 
-    ---
-
     Serial.println("[위성 및 정밀도]");
     if (p_gpsData.satellites.isValid) {
         Serial.printf("  수신 위성 수: %lu\n", p_gpsData.satellites.value);
@@ -364,9 +362,7 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
     } else {
         Serial.println("  HDOP 데이터: 유효하지 않음");
     }
-    Serial.println("  PDOP(Positional Dilution of Precision): 전체 3D 위치 정밀도를 나타냅니다. HDOP(수평 정밀도)와 VDOP(수직 정밀도)를 모두 고려합니다. 값이 낮을수록 더 높은 3D 위치 정확도를 의미하며, 이는 GPS 수신 상태가 좋다는 것을 나타냅니다.");
-    ---
-
+    
     Serial.println("[진단 정보]");
     Serial.printf("  처리된 문자 수: %lu\n", p_gpsData.diagnostics.charsProcessed);
     Serial.printf("  Fix 있는 문장 수: %lu\n", p_gpsData.diagnostics.sentencesWithFix);
