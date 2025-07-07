@@ -115,6 +115,7 @@ struct T10_GPS_ALL_DATA {
         double hdop;           // HDOP 값
         uint32_t value;        // 원시 HDOP 값
         unsigned long ageMs;   // 데이터 갱신 시간 (밀리초)
+        String accuracyLevel;  // HDOP 정확도 수준 추가
         bool isValid;          // 유효성 여부
     } hdop;
 
@@ -167,6 +168,16 @@ void T10_processGpsData() {
     while (G_T10_GPS_SERIAL.available() > 0) {
         g_T10_gps.encode(G_T10_GPS_SERIAL.read());
     }
+}
+
+// HDOP 값에 따른 정확도 수준 문자열을 반환하는 헬퍼 함수
+String T10_getHdopAccuracyLevel(double hdop) {
+    if (hdop <= 1.0) return "이상적인 (Excellent)";
+    else if (hdop <= 2.0) return "우수한 (Good)";
+    else if (hdop <= 5.0) return "적당한 (Moderate)";
+    else if (hdop <= 10.0) return "보통의 (Fair)";
+    else if (hdop <= 20.0) return "나쁜 (Poor)";
+    else return "매우 나쁜 (Very Poor)";
 }
 
 /**
@@ -236,7 +247,15 @@ void T10_updateGpsAllData(T10_GPS_ALL_DATA &p_gpsData) {
     p_gpsData.hdop.hdop = g_T10_gps.hdop.hdop();
     p_gpsData.hdop.value = g_T10_gps.hdop.value();
     p_gpsData.hdop.ageMs = g_T10_gps.hdop.age();
+	
     p_gpsData.hdop.isValid = g_T10_gps.hdop.isValid();
+
+	// HDOP 정확도 수준 업데이트
+    if (p_gpsData.hdop.isValid) {
+        p_gpsData.hdop.accuracyLevel = T10_getHdopAccuracyLevel(p_gpsData.hdop.hdop);
+    } else {
+        p_gpsData.hdop.accuracyLevel = "알 수 없음 (Not Available)"; // 유효하지 않을 경우
+    }
 
     // 진단 정보 업데이트
     p_gpsData.diagnostics.charsProcessed = g_T10_gps.charsProcessed();
@@ -262,15 +281,6 @@ void T10_updateGpsAllData(T10_GPS_ALL_DATA &p_gpsData) {
     p_gpsData.hasFix = g_T10_gps.location.isValid(); // 위치 데이터가 유효하면 fix로 간주
 }
 
-// HDOP 값에 따른 정확도 수준 문자열을 반환하는 헬퍼 함수
-String T10_getHdopAccuracyLevel(double hdop) {
-    if (hdop <= 1.0) return "이상적인 (Excellent)";
-    else if (hdop <= 2.0) return "우수한 (Good)";
-    else if (hdop <= 5.0) return "적당한 (Moderate)";
-    else if (hdop <= 10.0) return "보통의 (Fair)";
-    else if (hdop <= 20.0) return "나쁜 (Poor)";
-    else return "매우 나쁜 (Very Poor)";
-}
 
 /**
  * @brief T10_GPS_ALL_DATA 구조체에 저장된 모든 GPS 정보를 시리얼 모니터에 출력합니다.
@@ -356,7 +366,9 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
         Serial.println("  위성 수 데이터: 유효하지 않음");
     }
     if (p_gpsData.hdop.isValid) {
-        Serial.printf("  HDOP: %.2f (정확도 수준: %s)\n", p_gpsData.hdop.hdop, T10_getHdopAccuracyLevel(p_gpsData.hdop.hdop).c_str());
+       // Serial.printf("  HDOP: %.2f (정확도 수준: %s)\n", p_gpsData.hdop.hdop, T10_getHdopAccuracyLevel(p_gpsData.hdop.hdop).c_str());
+		Serial.printf("  HDOP: %.2f (정확도 수준: %s)\n", p_gpsData.hdop.hdop, p_gpsData.hdop.accuracyLevel.c_str()); // 변경된 부분
+        
         Serial.printf("  원시 HDOP 값: %lu\n", p_gpsData.hdop.value);
         Serial.printf("  데이터 갱신 시간 (HDOP): %lu ms\n", p_gpsData.hdop.ageMs);
     } else {
