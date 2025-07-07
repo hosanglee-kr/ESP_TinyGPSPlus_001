@@ -29,15 +29,12 @@ static const unsigned long G_T10_GPS_PRINT_INTERVAL_MS = 1000; // 1초
 // TinyGPSPlus 객체 선언
 TinyGPSPlus g_T10_gps;
 
-// 마지막으로 GPS 정보를 출력한 시간 (밀리초)
-unsigned long g_T10_lastGpsPrintTime = 0;
+// g_T10_lastGpsPrintTime은 T10_GPS_run 함수 내부의 static 변수로 이동하여 전역 변수에서 제거되었습니다.
 
 
 // =========================================================================
 // T10_GPS_ALL_DATA 구조체 정의
 // =========================================================================
-
-
 
 // GPS의 모든 정보를 담을 구조체 정의
 struct T10_GPS_ALL_DATA {
@@ -150,7 +147,7 @@ struct T10_GPS_ALL_DATA {
  */
 void T10_initGpsModule() {
     Serial.begin(115200); // 디버깅 출력을 위한 시리얼 모니터
-    while (!Serial);      // 시리얼 포트가 열릴 때까지 대기
+    // while (!Serial); // 시리얼 모니터 연결이 필수가 아니므로 이 루프는 제거합니다.
 
     // ESP32 하드웨어 Serial2 시작 (BN-280 연결)
     G_T10_GPS_SERIAL.begin(G_T10_GPS_BAUD_RATE);
@@ -265,6 +262,16 @@ void T10_updateGpsAllData(T10_GPS_ALL_DATA &p_gpsData) {
     p_gpsData.hasFix = g_T10_gps.location.isValid(); // 위치 데이터가 유효하면 fix로 간주
 }
 
+// HDOP 값에 따른 정확도 수준 문자열을 반환하는 헬퍼 함수
+String T10_getHdopAccuracyLevel(double hdop) {
+    if (hdop <= 1.0) return "이상적인 (Excellent)";
+    else if (hdop <= 2.0) return "우수한 (Good)";
+    else if (hdop <= 5.0) return "적당한 (Moderate)";
+    else if (hdop <= 10.0) return "보통의 (Fair)";
+    else if (hdop <= 20.0) return "나쁜 (Poor)";
+    else return "매우 나쁜 (Very Poor)";
+}
+
 /**
  * @brief T10_GPS_ALL_DATA 구조체에 저장된 모든 GPS 정보를 시리얼 모니터에 출력합니다.
  * @param p_gpsData 출력할 T10_GPS_ALL_DATA 구조체 변수의 상수 참조
@@ -341,6 +348,8 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
         Serial.println("  고도 데이터: 유효하지 않음");
     }
 
+    ---
+
     Serial.println("[위성 및 정밀도]");
     if (p_gpsData.satellites.isValid) {
         Serial.printf("  수신 위성 수: %lu\n", p_gpsData.satellites.value);
@@ -349,26 +358,14 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
         Serial.println("  위성 수 데이터: 유효하지 않음");
     }
     if (p_gpsData.hdop.isValid) {
-        Serial.printf("  HDOP: %.2f\n", p_gpsData.hdop.hdop);
+        Serial.printf("  HDOP: %.2f (정확도 수준: %s)\n", p_gpsData.hdop.hdop, T10_getHdopAccuracyLevel(p_gpsData.hdop.hdop).c_str());
         Serial.printf("  원시 HDOP 값: %lu\n", p_gpsData.hdop.value);
         Serial.printf("  데이터 갱신 시간 (HDOP): %lu ms\n", p_gpsData.hdop.ageMs);
-		
-		if (p_gpsData.hdop.hdop <= 1.0) {
-			Serial.println("이상적인 (Excellent)");
-		} else if (p_gpsData.hdop.hdop <= 2.0) { 
-			Serial.println( "우수한 (Good)");
-	    } else if (p_gpsData.hdop.hdop <= 5.0) { 
-			Serial.println(  "적당한 (Moderate)");
-        } else if (p_gpsData.hdop.hdop <= 10.0) { 
-			Serial.println(  "보통의 (Fair)");
-        } else if (p_gpsData.hdop.hdop <= 20.0) { 
-			Serial.println(  "나쁜 (Poor)");
-        } else {
-			Serial.println(  "매우 나쁜 (Very Poor)");
-		}
     } else {
         Serial.println("  HDOP 데이터: 유효하지 않음");
     }
+    Serial.println("  PDOP(Positional Dilution of Precision): 전체 3D 위치 정밀도를 나타냅니다. HDOP(수평 정밀도)와 VDOP(수직 정밀도)를 모두 고려합니다. 값이 낮을수록 더 높은 3D 위치 정확도를 의미하며, 이는 GPS 수신 상태가 좋다는 것을 나타냅니다.");
+    ---
 
     Serial.println("[진단 정보]");
     Serial.printf("  처리된 문자 수: %lu\n", p_gpsData.diagnostics.charsProcessed);
@@ -397,7 +394,9 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
  * 이 함수는 loop() 함수에서 계속 호출되어야 합니다.
  */
 void T10_GPS_run() {
-    unsigned long v_currentTime = millis(); // 로컬 변수 v_currentTime
+    // 마지막 GPS 정보를 출력한 시간을 static 변수로 선언 (함수 내부에서만 유효하며 값을 유지)
+    static unsigned long g_T10_lastGpsPrintTime = 0;
+    unsigned long v_currentTime = millis();
 
     if (v_currentTime - g_T10_lastGpsPrintTime >= G_T10_GPS_PRINT_INTERVAL_MS) {
         g_T10_lastGpsPrintTime = v_currentTime; // 마지막 출력 시간 갱신
@@ -407,8 +406,5 @@ void T10_GPS_run() {
         T10_printGpsAllData(v_currentGpsData);   // 구조체 내용 출력
     }
 }
-
-
-
 
 #endif // T10_GPSMODULE_H
