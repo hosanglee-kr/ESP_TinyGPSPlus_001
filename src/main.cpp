@@ -18,7 +18,6 @@ void setup() {
 
 void loop() {
     #ifdef T10
-	    T10_processGpsData();       // GPS 데이터 파싱 함수 호출
-        T10_handleGpsUpdateAndPrint(); 
+	    T10_GPS_run();
     #endif
 }
