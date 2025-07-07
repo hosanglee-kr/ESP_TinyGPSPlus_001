@@ -188,65 +188,65 @@ String T10_getHdopAccuracyLevel(double hdop) {
  */
 void T10_updateGpsAllData(T10_GPS_ALL_DATA &p_gpsData) {
     // 위치 정보 업데이트
-    p_gpsData.location.latitude = g_T10_gps.location.lat();
-    p_gpsData.location.longitude = g_T10_gps.location.lng();
-    p_gpsData.location.rawLatDeg = g_T10_gps.location.rawLat().deg;
+    p_gpsData.location.latitude         = g_T10_gps.location.lat();
+    p_gpsData.location.longitude        = g_T10_gps.location.lng();
+    p_gpsData.location.rawLatDeg        = g_T10_gps.location.rawLat().deg;
     p_gpsData.location.rawLatBillionths = g_T10_gps.location.rawLat().billionths;
-    p_gpsData.location.rawLatNegative = g_T10_gps.location.rawLat().negative;
-    p_gpsData.location.rawLngDeg = g_T10_gps.location.rawLng().deg;
+    p_gpsData.location.rawLatNegative   = g_T10_gps.location.rawLat().negative;
+    p_gpsData.location.rawLngDeg        = g_T10_gps.location.rawLng().deg;
     p_gpsData.location.rawLngBillionths = g_T10_gps.location.rawLng().billionths;
-    p_gpsData.location.rawLngNegative = g_T10_gps.location.rawLng().negative;
-    p_gpsData.location.ageMs = g_T10_gps.location.age();
-    p_gpsData.location.isValid = g_T10_gps.location.isValid();
+    p_gpsData.location.rawLngNegative   = g_T10_gps.location.rawLng().negative;
+    p_gpsData.location.ageMs            = g_T10_gps.location.age();
+    p_gpsData.location.isValid          = g_T10_gps.location.isValid();
 
     // 날짜 정보 업데이트
-    p_gpsData.date.year = g_T10_gps.date.year();
-    p_gpsData.date.month = g_T10_gps.date.month();
-    p_gpsData.date.day = g_T10_gps.date.day();
-    p_gpsData.date.value = g_T10_gps.date.value();
-    p_gpsData.date.ageMs = g_T10_gps.date.age();
-    p_gpsData.date.isValid = g_T10_gps.date.isValid();
+    p_gpsData.date.year                 = g_T10_gps.date.year();
+    p_gpsData.date.month                = g_T10_gps.date.month();
+    p_gpsData.date.day                  = g_T10_gps.date.day();
+    p_gpsData.date.value                = g_T10_gps.date.value();
+    p_gpsData.date.ageMs                = g_T10_gps.date.age();
+    p_gpsData.date.isValid              = g_T10_gps.date.isValid();
 
     // 시간 정보 업데이트
-    p_gpsData.time.hour = g_T10_gps.time.hour();
-    p_gpsData.time.minute = g_T10_gps.time.minute();
-    p_gpsData.time.second = g_T10_gps.time.second();
-    p_gpsData.time.centisecond = g_T10_gps.time.centisecond();
-    p_gpsData.time.value = g_T10_gps.time.value();
-    p_gpsData.time.ageMs = g_T10_gps.time.age();
-    p_gpsData.time.isValid = g_T10_gps.time.isValid();
+    p_gpsData.time.hour                 = g_T10_gps.time.hour();
+    p_gpsData.time.minute               = g_T10_gps.time.minute();
+    p_gpsData.time.second               = g_T10_gps.time.second();
+    p_gpsData.time.centisecond          = g_T10_gps.time.centisecond();
+    p_gpsData.time.value                = g_T10_gps.time.value();
+    p_gpsData.time.ageMs                = g_T10_gps.time.age();
+    p_gpsData.time.isValid              = g_T10_gps.time.isValid();
 
     // 속도 정보 업데이트
-    p_gpsData.speed.knots = g_T10_gps.speed.knots();
-    p_gpsData.speed.mph = g_T10_gps.speed.mph();
-    p_gpsData.speed.mps = g_T10_gps.speed.mps();
-    p_gpsData.speed.kmph = g_T10_gps.speed.kmph();
-    p_gpsData.speed.value = g_T10_gps.speed.value();
-    p_gpsData.speed.ageMs = g_T10_gps.speed.age();
+    p_gpsData.speed.knots   = g_T10_gps.speed.knots();
+    p_gpsData.speed.mph     = g_T10_gps.speed.mph();
+    p_gpsData.speed.mps     = g_T10_gps.speed.mps();
+    p_gpsData.speed.kmph    = g_T10_gps.speed.kmph();
+    p_gpsData.speed.value   = g_T10_gps.speed.value();
+    p_gpsData.speed.ageMs   = g_T10_gps.speed.age();
     p_gpsData.speed.isValid = g_T10_gps.speed.isValid();
 
     // 진행 방향 정보 업데이트
     p_gpsData.course.degrees = g_T10_gps.course.deg();
-    p_gpsData.course.value = g_T10_gps.course.value();
-    p_gpsData.course.ageMs = g_T10_gps.course.age();
+    p_gpsData.course.value   = g_T10_gps.course.value();
+    p_gpsData.course.ageMs   = g_T10_gps.course.age();
     p_gpsData.course.isValid = g_T10_gps.course.isValid();
 
     // 고도 정보 업데이트
-    p_gpsData.altitude.meters = g_T10_gps.altitude.meters();
-    p_gpsData.altitude.miles = g_T10_gps.altitude.miles();
+    p_gpsData.altitude.meters     = g_T10_gps.altitude.meters();
+    p_gpsData.altitude.miles      = g_T10_gps.altitude.miles();
     p_gpsData.altitude.kilometers = g_T10_gps.altitude.kilometers();
-    p_gpsData.altitude.feet = g_T10_gps.altitude.feet();
-    p_gpsData.altitude.value = g_T10_gps.altitude.value();
-    p_gpsData.altitude.ageMs = g_T10_gps.altitude.age();
-    p_gpsData.altitude.isValid = g_T10_gps.altitude.isValid();
+    p_gpsData.altitude.feet       = g_T10_gps.altitude.feet();
+    p_gpsData.altitude.value      = g_T10_gps.altitude.value();
+    p_gpsData.altitude.ageMs      = g_T10_gps.altitude.age();
+    p_gpsData.altitude.isValid    = g_T10_gps.altitude.isValid();
 
     // 위성 수 정보 업데이트
-    p_gpsData.satellites.value = g_T10_gps.satellites.value();
-    p_gpsData.satellites.ageMs = g_T10_gps.satellites.age();
+    p_gpsData.satellites.value   = g_T10_gps.satellites.value();
+    p_gpsData.satellites.ageMs   = g_T10_gps.satellites.age();
     p_gpsData.satellites.isValid = g_T10_gps.satellites.isValid();
 
     // HDOP 정보 업데이트
-    p_gpsData.hdop.hdop = g_T10_gps.hdop.hdop();
+    p_gpsData.hdop.hdop  .= g_T10_gps.hdop.hdop();
     p_gpsData.hdop.value = g_T10_gps.hdop.value();
     p_gpsData.hdop.ageMs = g_T10_gps.hdop.age();
 	
