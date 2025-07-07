@@ -352,6 +352,13 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
         Serial.printf("  HDOP: %.2f\n", p_gpsData.hdop.hdop);
         Serial.printf("  원시 HDOP 값: %lu\n", p_gpsData.hdop.value);
         Serial.printf("  데이터 갱신 시간 (HDOP): %lu ms\n", p_gpsData.hdop.ageMs);
+		
+		if (p_gpsData.hdop.hdop <= 1.0) return "이상적인 (Excellent)";
+        else if (p_gpsData.hdop.hdop <= 2.0) return "우수한 (Good)";
+        else if (p_gpsData.hdop.hdop <= 5.0) return "적당한 (Moderate)";
+        else if (p_gpsData.hdop.hdop <= 10.0) return "보통의 (Fair)";
+        else if (p_gpsData.hdop.hdop <= 20.0) return "나쁜 (Poor)";
+        else return "매우 나쁜 (Very Poor)";
     } else {
         Serial.println("  HDOP 데이터: 유효하지 않음");
     }
