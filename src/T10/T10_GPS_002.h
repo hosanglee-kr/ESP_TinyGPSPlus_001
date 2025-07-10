@@ -42,98 +42,98 @@ TinyGPSPlus g_T10_gps;
 struct T10_GPS_ALL_DATA {
     // 위치 정보
     struct LocationData {
-        double latitude;       		// 위도 (도 단위)
-        double longitude;      		// 경도 (도 단위)
-        int32_t rawLatDeg;     		// 원시 위도 정수 부분
-        uint32_t rawLatBillionths; 	// 원시 위도 소수점 아래 9자리
-        bool rawLatNegative;   		// 원시 위도 음수 여부
-        int32_t rawLngDeg;     		// 원시 경도 정수 부분
-        uint32_t rawLngBillionths; 	// 원시 경도 소수점 아래 9자리
-        bool rawLngNegative;   		// 원시 경도 음수 여부
-        unsigned long ageMs;   		// 데이터 갱신 시간 (밀리초)
-        bool isValid;          		// 유효성 여부
+        double          latitude;       	// 위도 (도 단위)
+        double          longitude;      	// 경도 (도 단위)
+        // int32_t         rawLatDeg;     		// 원시 위도 정수 부분
+        // uint32_t        rawLatBillionths; 	// 원시 위도 소수점 아래 9자리
+        // bool            rawLatNegative;   	// 원시 위도 음수 여부
+        // int32_t         rawLngDeg;     		// 원시 경도 정수 부분
+        // uint32_t        rawLngBillionths; 	// 원시 경도 소수점 아래 9자리
+        // bool            rawLngNegative;   	// 원시 경도 음수 여부
+        unsigned long   ageMs;   		    // 데이터 갱신 시간 (밀리초)
+        bool            isValid;          	// 유효성 여부
     } location;
 
     // 날짜 정보
     struct DateData {
-        uint16_t year;         // 연도
-        uint8_t month;         // 월
-        uint8_t day;           // 일
-        uint32_t value;        // 원시 날짜 값
-        unsigned long ageMs;   // 데이터 갱신 시간 (밀리초)
-        bool isValid;          // 유효성 여부
+        uint16_t        year;       // 연도
+        uint8_t         month;      // 월
+        uint8_t         day;        // 일
+        uint32_t        value;      // 원시 날짜 값
+        unsigned long   ageMs;      // 데이터 갱신 시간 (밀리초)
+        bool isValid;               // 유효성 여부
     } date;
 
     // 시간 정보
     struct TimeData {
-        uint8_t hour;          // 시 (UTC)
-        uint8_t minute;        // 분 (UTC)
-        uint8_t second;        // 초 (UTC)
-        uint8_t centisecond;   // 1/100 초
-        uint32_t value;        // 원시 시간 값
-        unsigned long ageMs;   // 데이터 갱신 시간 (밀리초)
-        bool isValid;          // 유효성 여부
+        uint8_t         hour;           // 시 (UTC)
+        uint8_t         minute;         // 분 (UTC)
+        uint8_t         second;         // 초 (UTC)
+        uint8_t         centisecond;    // 1/100 초
+        uint32_t        value;          // 원시 시간 값
+        unsigned long   ageMs;          // 데이터 갱신 시간 (밀리초)
+        bool            isValid;        // 유효성 여부
     } time;
 
     // 속도 정보
     struct SpeedData {
-        double knots;          // 속도 (노트)
-        double mph;            // 속도 (마일/시)
-        double mps;            // 속도 (미터/초)
-        double kmph;           // 속도 (킬로미터/시)
-        uint32_t value;        // 원시 속도 값
-        unsigned long ageMs;   // 데이터 갱신 시간 (밀리초)
-        bool isValid;          // 유효성 여부
+        // double          knots;          // 속도 (노트)
+        // double          mph;            // 속도 (마일/시)
+        double          mps;            // 속도 (미터/초)
+        double          kmph;           // 속도 (킬로미터/시)
+        // uint32_t        value;          // 원시 속도 값
+        unsigned long   ageMs;          // 데이터 갱신 시간 (밀리초)
+        bool            isValid;        // 유효성 여부
     } speed;
 
     // 진행 방향 정보
     struct CourseData {
-        double degrees;        // 진행 방향 (도 단위)
-        uint32_t value;        // 원시 방향 값
-        unsigned long ageMs;   // 데이터 갱신 시간 (밀리초)
-        bool isValid;          // 유효성 여부
+        double          degrees;        // 진행 방향 (도 단위)
+        // uint32_t        value;          // 원시 방향 값
+        unsigned long   ageMs;          // 데이터 갱신 시간 (밀리초)
+        bool            isValid;        // 유효성 여부
     } course;
 
     // 고도 정보
     struct AltitudeData {
-        double meters;         // 고도 (미터)
-        double miles;          // 고도 (마일)
-        double kilometers;     // 고도 (킬로미터)
-        double feet;           // 고도 (피트)
-        uint32_t value;        // 원시 고도 값
-        unsigned long ageMs;   // 데이터 갱신 시간 (밀리초)
-        bool isValid;          // 유효성 여부
+        double          meters;         // 고도 (미터)
+        // double          miles;          // 고도 (마일)
+        double          kilometers;     // 고도 (킬로미터)
+        // double          feet;           // 고도 (피트)
+        //uint32_t        value;          // 원시 고도 값
+        unsigned long   ageMs;          // 데이터 갱신 시간 (밀리초)
+        bool            isValid;        // 유효성 여부
     } altitude;
 
     // 위성 수 정보
     struct SatellitesData {
-        uint32_t value;        // 위성 수
-        unsigned long ageMs;   // 데이터 갱신 시간 (밀리초)
-        bool isValid;          // 유효성 여부
+        uint32_t        value;          // 위성 수
+        unsigned long   ageMs;          // 데이터 갱신 시간 (밀리초)
+        bool            isValid;        // 유효성 여부
     } satellites;
 
     // HDOP (Horizontal Dilution of Precision) 정보
     struct HdopData {
-        double hdop;           // HDOP 값
-        uint32_t value;        // 원시 HDOP 값
-        unsigned long ageMs;   // 데이터 갱신 시간 (밀리초)
-        String accuracyLevel;  // HDOP 정확도 수준 추가
-        bool isValid;          // 유효성 여부
+        double          hdop;           // HDOP 값
+        uint32_t        value;          // 원시 HDOP 값
+        unsigned long   ageMs;          // 데이터 갱신 시간 (밀리초)
+        String          accuracyLevel;  // HDOP 정확도 수준 추가
+        bool            isValid;        // 유효성 여부
     } hdop;
 
     // 진단 정보
     struct DiagnosticsData {
-        uint32_t charsProcessed;   // 처리된 문자 수
-        uint32_t sentencesWithFix; // Fix가 있는 문장 수
-        uint32_t failedChecksum;   // 체크섬 실패 수
-        uint32_t passedChecksum;   // 체크섬 성공 수
+        uint32_t        charsProcessed;   // 처리된 문자 수
+        uint32_t        sentencesWithFix; // Fix가 있는 문장 수
+        uint32_t        failedChecksum;   // 체크섬 실패 수
+        uint32_t        passedChecksum;   // 체크섬 성공 수
     } diagnostics;
 
     // 특정 목적지 (서울시청) 관련 정보
     struct DestinationData {
-        double distanceKm;     	// 목적지와의 거리 (킬로미터)
-        double courseToDeg;    	// 목적지로 향하는 방향 (도 단위)
-        bool isValid;          	// 계산 유효성 여부 (위치 데이터가 유효할 때만 유효)
+        double          distanceKm;     	// 목적지와의 거리 (킬로미터)
+        double          courseToDeg;    	// 목적지로 향하는 방향 (도 단위)
+        bool            isValid;          	// 계산 유효성 여부 (위치 데이터가 유효할 때만 유효)
     } seoulCityHall; 			// 서울시청에 대한 정보를 담기 위한 구조체 변수명
 
     // 기타 상태
@@ -188,12 +188,12 @@ void T10_updateGpsAllData(T10_GPS_ALL_DATA &p_gpsData) {
     // 위치 정보 업데이트
     p_gpsData.location.latitude         = g_T10_gps.location.lat();
     p_gpsData.location.longitude        = g_T10_gps.location.lng();
-    p_gpsData.location.rawLatDeg        = g_T10_gps.location.rawLat().deg;
-    p_gpsData.location.rawLatBillionths = g_T10_gps.location.rawLat().billionths;
-    p_gpsData.location.rawLatNegative   = g_T10_gps.location.rawLat().negative;
-    p_gpsData.location.rawLngDeg        = g_T10_gps.location.rawLng().deg;
-    p_gpsData.location.rawLngBillionths = g_T10_gps.location.rawLng().billionths;
-    p_gpsData.location.rawLngNegative   = g_T10_gps.location.rawLng().negative;
+    // p_gpsData.location.rawLatDeg        = g_T10_gps.location.rawLat().deg;
+    // p_gpsData.location.rawLatBillionths = g_T10_gps.location.rawLat().billionths;
+    // p_gpsData.location.rawLatNegative   = g_T10_gps.location.rawLat().negative;
+    // p_gpsData.location.rawLngDeg        = g_T10_gps.location.rawLng().deg;
+    // p_gpsData.location.rawLngBillionths = g_T10_gps.location.rawLng().billionths;
+    // p_gpsData.location.rawLngNegative   = g_T10_gps.location.rawLng().negative;
     p_gpsData.location.ageMs            = g_T10_gps.location.age();
     p_gpsData.location.isValid          = g_T10_gps.location.isValid();
 
@@ -215,26 +215,26 @@ void T10_updateGpsAllData(T10_GPS_ALL_DATA &p_gpsData) {
     p_gpsData.time.isValid              = g_T10_gps.time.isValid();
 
     // 속도 정보 업데이트
-    p_gpsData.speed.knots   = g_T10_gps.speed.knots();
-    p_gpsData.speed.mph     = g_T10_gps.speed.mph();
+    // p_gpsData.speed.knots   = g_T10_gps.speed.knots();
+    // p_gpsData.speed.mph     = g_T10_gps.speed.mph();
     p_gpsData.speed.mps     = g_T10_gps.speed.mps();
     p_gpsData.speed.kmph    = g_T10_gps.speed.kmph();
-    p_gpsData.speed.value   = g_T10_gps.speed.value();
+    // p_gpsData.speed.value   = g_T10_gps.speed.value();
     p_gpsData.speed.ageMs   = g_T10_gps.speed.age();
     p_gpsData.speed.isValid = g_T10_gps.speed.isValid();
 
     // 진행 방향 정보 업데이트
     p_gpsData.course.degrees = g_T10_gps.course.deg();
-    p_gpsData.course.value   = g_T10_gps.course.value();
+    // p_gpsData.course.value   = g_T10_gps.course.value();
     p_gpsData.course.ageMs   = g_T10_gps.course.age();
     p_gpsData.course.isValid = g_T10_gps.course.isValid();
 
     // 고도 정보 업데이트
     p_gpsData.altitude.meters     = g_T10_gps.altitude.meters();
-    p_gpsData.altitude.miles      = g_T10_gps.altitude.miles();
+    // p_gpsData.altitude.miles      = g_T10_gps.altitude.miles();
     p_gpsData.altitude.kilometers = g_T10_gps.altitude.kilometers();
-    p_gpsData.altitude.feet       = g_T10_gps.altitude.feet();
-    p_gpsData.altitude.value      = g_T10_gps.altitude.value();
+    // p_gpsData.altitude.feet       = g_T10_gps.altitude.feet();
+    // p_gpsData.altitude.value      = g_T10_gps.altitude.value();
     p_gpsData.altitude.ageMs      = g_T10_gps.altitude.age();
     p_gpsData.altitude.isValid    = g_T10_gps.altitude.isValid();
 
@@ -244,7 +244,7 @@ void T10_updateGpsAllData(T10_GPS_ALL_DATA &p_gpsData) {
     p_gpsData.satellites.isValid = g_T10_gps.satellites.isValid();
 
     // HDOP 정보 업데이트
-    p_gpsData.hdop.hdop  .= g_T10_gps.hdop.hdop();
+    p_gpsData.hdop.hdop  = g_T10_gps.hdop.hdop();
     p_gpsData.hdop.value = g_T10_gps.hdop.value();
     p_gpsData.hdop.ageMs = g_T10_gps.hdop.age();
 	
@@ -293,10 +293,10 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
     if (p_gpsData.location.isValid) {
         Serial.printf("  위도: %.6f, 경도: %.6f\n", p_gpsData.location.latitude, p_gpsData.location.longitude);
         Serial.printf("  원시 위도: %s%d.%lu, 원시 경도: %s%d.%lu\n",
-                      p_gpsData.location.rawLatNegative ? "-" : "+",
-                      p_gpsData.location.rawLatDeg, p_gpsData.location.rawLatBillionths,
-                      p_gpsData.location.rawLngNegative ? "-" : "+",
-                      p_gpsData.location.rawLngDeg, p_gpsData.location.rawLngBillionths);
+                      // p_gpsData.location.rawLatNegative ? "-" : "+",
+                      // p_gpsData.location.rawLatDeg, p_gpsData.location.rawLatBillionths,
+                      // p_gpsData.location.rawLngNegative ? "-" : "+",
+                      // p_gpsData.location.rawLngDeg, p_gpsData.location.rawLngBillionths);
         Serial.printf("  데이터 갱신 시간 (위치): %lu ms\n", p_gpsData.location.ageMs);
     } else {
         Serial.println("  위치 데이터: 유효하지 않음");

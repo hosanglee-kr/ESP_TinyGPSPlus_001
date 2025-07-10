@@ -2,7 +2,7 @@
 
 #define T10
 #ifdef T10
-	#include "T10/T10_GPS_001.h"
+	#include "T10/T10_GPS_002.h"
 #endif
 
 void setup() {
