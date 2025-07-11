@@ -16,6 +16,14 @@ void setup() {
 	    // GPS 모듈 초기화:
         // GPS 모듈의 시리얼 통신을 설정하고 초기 메시지를 출력합니다.
         myGps.begin();
+
+	    // 예시: 목적지를 남양주시청으로 설정 (임의의 좌표)
+        // 남양주시청 (Namyangju City Hall) 좌표: 37.6358, 127.2166
+        double targetLat = 37.6358;
+        double targetLng = 127.2166;
+        T10_setDestination(targetLat, targetLng); 
+
+	
     #endif
 
 	Serial.println("11111");
