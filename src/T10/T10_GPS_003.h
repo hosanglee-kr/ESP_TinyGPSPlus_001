@@ -267,9 +267,6 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
     Serial.println("[위치]");
     if (p_gpsData.location.isValid) {
         Serial.printf("  위도: %.6f, 경도: %.6f\n", p_gpsData.location.latitude, p_gpsData.location.longitude);
-
-        Serial.printf("  원시 위도: %s%d.%lu, 원시 경도: %s%d.%lu\n" );
-
         Serial.printf("  데이터 갱신 시간 (위치): %lu ms\n", p_gpsData.location.ageMs);
     } else {
         Serial.println("  위치 데이터: 유효하지 않음");
