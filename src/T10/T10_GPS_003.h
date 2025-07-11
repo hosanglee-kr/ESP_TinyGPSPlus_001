@@ -149,6 +149,7 @@ void T10_initGpsModule() {
  * @brief GPS 모듈로부터 시리얼 데이터를 읽어 TinyGPSPlus로 파싱합니다.
  * 이 함수는 loop() 함수에서 계속 호출되어야 합니다.
  */
+
 void T10_processGpsData() {
     // GPS 모듈로부터 시리얼 데이터 읽기 및 TinyGPSPlus로 파싱
     while (G_T10_GPS_SERIAL.available() > 0) {
@@ -259,6 +260,7 @@ void T10_updateGpsAllData(T10_GPS_ALL_DATA &p_gpsData) {
  * @brief T10_GPS_ALL_DATA 구조체에 저장된 모든 GPS 정보를 시리얼 모니터에 출력합니다.
  * @param p_gpsData 출력할 T10_GPS_ALL_DATA 구조체 변수의 상수 참조
  */
+
 void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
     Serial.println("--- GPS 모든 정보 출력 ---");
 
@@ -345,10 +347,8 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
         Serial.println("  위성 수 데이터: 유효하지 않음");
     }
     if (p_gpsData.hdop.isValid) {
-       // Serial.printf("  HDOP: %.2f (정확도 수준: %s)\n", p_gpsData.hdop.hdop, T10_getHdopAccuracyLevel(p_gpsData.hdop.hdop).c_str());
 		Serial.printf("  HDOP: %.2f (정확도 수준: %s)\n", p_gpsData.hdop.hdop, p_gpsData.hdop.accuracyLevel.c_str()); // 변경된 부분
         
-        Serial.printf("  원시 HDOP 값: %lu\n", p_gpsData.hdop.value);
         Serial.printf("  데이터 갱신 시간 (HDOP): %lu ms\n", p_gpsData.hdop.ageMs);
     } else {
         Serial.println("  HDOP 데이터: 유효하지 않음");
