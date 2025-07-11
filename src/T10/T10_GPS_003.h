@@ -319,7 +319,7 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
 
     Serial.println("[고도]");
     if (p_gpsData.altitude.isValid) {
-        Serial.printf("  미터: %.2f, 킬로미터: %.2f, \n",
+        Serial.printf("  미터: %.2f, 킬로미터: %.2f\n",
                       p_gpsData.altitude.meters, p_gpsData.altitude.kilometers);
         Serial.printf("  데이터 갱신 시간 (고도): %lu ms\n", p_gpsData.altitude.ageMs);
     } else {
