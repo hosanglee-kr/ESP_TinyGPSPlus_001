@@ -268,12 +268,7 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
     if (p_gpsData.location.isValid) {
         Serial.printf("  위도: %.6f, 경도: %.6f\n", p_gpsData.location.latitude, p_gpsData.location.longitude);
 
-        Serial.printf("  원시 위도: %s%d.%lu, 원시 경도: %s%d.%lu\n"
-                      // , p_gpsData.location.rawLatNegative ? "-" : "+",
-                      // p_gpsData.location.rawLatDeg, p_gpsData.location.rawLatBillionths,
-                      // p_gpsData.location.rawLngNegative ? "-" : "+",
-                      // p_gpsData.location.rawLngDeg, p_gpsData.location.rawLngBillionths
-                      );
+        Serial.printf("  원시 위도: %s%d.%lu, 원시 경도: %s%d.%lu\n" );
 
         Serial.printf("  데이터 갱신 시간 (위치): %lu ms\n", p_gpsData.location.ageMs);
     } else {
@@ -312,9 +307,6 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
     if (p_gpsData.speed.isValid) {
         Serial.printf("  m/s: %.2f, km/h: %.2f\n",
                       p_gpsData.speed.mps, p_gpsData.speed.kmph);
-        // Serial.printf("  노트: %.2f, MPH: %.2f, m/s: %.2f, km/h: %.2f\n",
-        //               p_gpsData.speed.knots, p_gpsData.speed.mph, p_gpsData.speed.mps, p_gpsData.speed.kmph);
-        // Serial.printf("  원시 속도 값: %lu\n", p_gpsData.speed.value);
         Serial.printf("  데이터 갱신 시간 (속도): %lu ms\n", p_gpsData.speed.ageMs);
     } else {
         Serial.println("  속도 데이터: 유효하지 않음");
@@ -323,7 +315,6 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
     Serial.println("[진행 방향]");
     if (p_gpsData.course.isValid) {
         Serial.printf("  진행 방향: %.2f deg (%s)\n", p_gpsData.course.degrees, TinyGPSPlus::cardinal(p_gpsData.course.degrees));
-       // Serial.printf("  원시 방향 값: %lu\n", p_gpsData.course.value);
         Serial.printf("  데이터 갱신 시간 (방향): %lu ms\n", p_gpsData.course.ageMs);
     } else {
         Serial.println("  진행 방향 데이터: 유효하지 않음");
@@ -333,7 +324,6 @@ void T10_printGpsAllData(const T10_GPS_ALL_DATA &p_gpsData) {
     if (p_gpsData.altitude.isValid) {
         Serial.printf("  미터: %.2f, 킬로미터: %.2f, \n",
                       p_gpsData.altitude.meters, p_gpsData.altitude.kilometers);
-        // Serial.printf("  원시 고도 값: %lu\n", p_gpsData.altitude.value);
         Serial.printf("  데이터 갱신 시간 (고도): %lu ms\n", p_gpsData.altitude.ageMs);
     } else {
         Serial.println("  고도 데이터: 유효하지 않음");
